@@ -1,15 +1,59 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<title>v50，看看实力</title>
-		<body>KFC CRAZY THURS, V me 50 
-		<a>
-			
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Fireworks</title>
+<style>
+    body {
+        background-color: black;
+        overflow: hidden;
+    }
+    .firework {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background-color: #fff;
+        border-radius: 50%;
+        animation: explode 1s forwards;
+    }
+    @keyframes explode {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            width: 400px;
+            height: 400px;
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+<body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fireworksContainer = document.body;
+        const numberOfFireworks = 10;
 
-			<img src="https://p3.itc.cn/images01/20211222/f29437931d4e45bc8398549c4ad3357f.jpeg" alt="Description of the image">
+        function createFirework() {
+            const firework = document.createElement('div');
+            firework.classList.add('firework');
+            firework.style.left = Math.random() * window.innerWidth + 'px';
+            firework.style.top = Math.random() * window.innerHeight + 'px';
+            fireworksContainer.appendChild(firework);
+            setTimeout(() => {
+                firework.remove();
+            }, 1500);
+        }
 
-		</a>
-		</body>
+        function launchFireworks() {
+            for (let i = 0; i < numberOfFireworks; i++) {
+                setTimeout(createFirework, Math.random() * 3000);
+            }
+        }
 
+        launchFireworks();
+    });
+</script>
+</body>
 </html>
