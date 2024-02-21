@@ -1,59 +1,29 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-05-13 13:53:15
+ * @LastEditTime: 2021-05-13 13:54:41
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \HTML5庆祝生日蛋糕烟花特效\index.html
+-->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Fireworks</title>
-<style>
-    body {
-        background-color: black;
-        overflow: hidden;
-    }
-    .firework {
-        position: absolute;
-        width: 8px;
-        height: 8px;
-        background-color: #fff;
-        border-radius: 50%;
-        animation: explode 1s forwards;
-    }
-    @keyframes explode {
-        0% {
-            opacity: 1;
-        }
-        100% {
-            width: 400px;
-            height: 400px;
-            opacity: 0;
-        }
-    }
-</style>
-</head>
-<body>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const fireworksContainer = document.body;
-        const numberOfFireworks = 10;
+  <head>
+    <meta charset="UTF-8" />
+    <title>HTML5庆祝生日蛋糕烟花特效</title>
+    <link href="static/css/zzsc.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        function createFirework() {
-            const firework = document.createElement('div');
-            firework.classList.add('firework');
-            firework.style.left = Math.random() * window.innerWidth + 'px';
-            firework.style.top = Math.random() * window.innerHeight + 'px';
-            fireworksContainer.appendChild(firework);
-            setTimeout(() => {
-                firework.remove();
-            }, 1500);
-        }
+    <link rel="stylesheet" href="static/css/style.css" />
+  </head>
 
-        function launchFireworks() {
-            for (let i = 0; i < numberOfFireworks; i++) {
-                setTimeout(createFirework, Math.random() * 3000);
-            }
-        }
+  <body>
+    <h1 data-splitting>生日快乐 Happy birthday ❤<br />🎂</h1>
 
-        launchFireworks();
-    });
-</script>
-</body>
+    <script src="static/js/splitting.min.js"></script>
+    <script src="static/js/script.js"></script>
+  </body>
 </html>
+
+
+
