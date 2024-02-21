@@ -1,29 +1,96 @@
-<!--
- * @Author: your name
- * @Date: 2021-05-13 13:53:15
- * @LastEditTime: 2021-05-13 13:54:41
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \HTML5庆祝生日蛋糕烟花特效\index.html
--->
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="UTF-8" />
-    <title>HTML5庆祝生日蛋糕烟花特效</title>
-    <link href="static/css/zzsc.css" rel="stylesheet" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link rel="stylesheet" href="static/css/style.css" />
+    <title></title>
   </head>
+  <style type="text/css">
+    body,
+    html {
+      margin: 0;
+      width: 100%;
+      overflow: hidden;
+      background: #000000;
+    }
+
+    canvas {
+      position: absolute;
+      width: 100%;
+    }
+
+    .control button:focus,
+    .control button:hover {
+      background: #222;
+    }
+  </style>
+  <script
+    src="js/jquery.min.js"
+    type="text/javascript"
+    charset="utf-8"
+  ></script>
 
   <body>
-    <h1 data-splitting>小唯生日快乐 Happy birthday ❤<br />🎂</h1>
-
-    <script src="static/js/splitting.min.js"></script>
-    <script src="static/js/script.js"></script>
+    <div class="control" style="position: absolute"></div>
   </body>
+  <script type="text/javascript">
+    var can = document.createElement("canvas");
+    document.body.appendChild(can);
+    var ctx = can.getContext("2d");
+    var Fireworks = function () {
+      var self = this;
+      var rand = function (rMi, rMa) {
+        return ~~(Math.random() * (rMa - rMi + 1) + rMi);
+      };
+      var hitTest = function (x1, y1, w1, h1, x2, y2, w2, h2) {
+        return !(x1 + w1 < x2 || x2 + w2 < x1 || y1 + h1 < y2 || y2 + h2 < y1);
+      };
+      self.updateParticles = function () {
+        var i = self.particles.length;
+        while (i--) {
+          var p = self.particles[i];
+          var radians = (p.angle * Math.PI) / 180;
+          var vx = Math.cos(radians) * p.speed;
+          var vy = Math.sin(radians) * p.speed;
+          p.speed *= p.friction;
+          p.coordLast[2].x = p.coordLast[1].x;
+          p.coordLast[2].y = p.coordLast[1].y;
+          p.coordLast[1].x = p.coordLast[0].x;
+          p.coordLast[1].y = p.coordLast[0].y;
+          p.coordLast[0].x = p.x;
+          p.coordLast[0].y = p.y;
+          p.x += vx;
+          p.y += vy;
+          p.y += p.gravity;
+          p.angle += p.wind;
+          p.alpha -= p.decay;
+          if (
+            !hitTest(
+              0,
+              0,
+              self.cw,
+              self.ch,
+              p.x - p.radius,
+              p.y - p.radius,
+              p.radius * 2,
+              p.radius * 2
+            ) ||
+            p.alpha < 0.05
+          ) {
+            self.particles.splice(i, 1);
+          }
+        }
+      };
+
+    function draw(obj) {
+      ctx.beginPath();
+      ctx.arc(obj.target.x, obj.target.y, obj.radius, 0, 2 * Math.PI);
+      ctx.fillStyle = obj.color;
+      ctx.fill();
+    }
+    changeText("小唯生日快乐!!!");
+    var t = 0;
+    var id;
+    var fworks = new Fireworks();
+
+  </script>
 </html>
-
-
-
